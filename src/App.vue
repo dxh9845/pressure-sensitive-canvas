@@ -5,13 +5,11 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
 import PressureCanvas from './components/PressureCanvas.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
     PressureCanvas,
   },
 };

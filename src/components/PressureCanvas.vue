@@ -94,17 +94,17 @@ export default {
       }
 
       const canvasBoundingRect = this.canvas.getBoundingClientRect();
-      // this.brushCanvas = document.createElement("canvas");
-      // this.brushCanvasCtx = this.brushCanvas.getContext('2d')
       this.canvasLeft = canvasBoundingRect.left;
       this.canvasTop = canvasBoundingRect.top;
     },
     upHandler(event) {
       this.pressure = null;
+      this.canvasCtx.closePath();
     },
     downHandler(event) {
       this.x = event.clientX - this.canvasLeft;
       this.y = event.clientY - this.canvasTop;
+      this.canvasCtx.beginPath()
     },
     changePressure({ pressure }) {
       this.pressure = pressure;
@@ -112,7 +112,7 @@ export default {
     processPen(event) {
       if ((event.buttons != 1 && event.buttons != 32) || event.pointerType != 'pen') return;
       this.changePressure(event);
-      this.canvasCtx.beginPath();
+    //   this.canvasCtx.beginPath();
       this.canvasCtx.lineWidth = this.lineWidth;
       this.canvasCtx.lineCap = 'round';
       this.canvasCtx.strokeStyle = '#000000';
@@ -121,11 +121,6 @@ export default {
       this.y = event.clientY - this.canvasTop;
       this.canvasCtx.lineTo(this.x, this.y);
       this.canvasCtx.stroke();
-
-
-      // console.log(event)
-
-      // this.canvasCtx.drawImage(this.brushCanvas, Math.ceil(event.x - this.brushCanvasSize/ 2), Math.ceil(event.y - this.brushCanvasSize/ 2));
     },
   },
 
